@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-   
+    <meta charset="UTF-8">
+
+    <!-- ✅ CHẶN NGƯỜI DÙNG CHƯA ĐĂNG NHẬP -->
+    <script>
+        if (sessionStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <title>Giới thiệu thành viên nhóm</title>
+
     <style>
         body {
             margin: 0;
@@ -54,7 +64,9 @@
             border-bottom: 3px solid #1976d2;
         }
 
-        .info { padding: 18px; }
+        .info {
+            padding: 18px;
+        }
 
         .info h3 {
             margin: 10px 0 6px;
@@ -74,6 +86,7 @@
             color: #1976d2;
         }
 
+        /* CARD THỨ 10 RA GIỮA */
         .member:nth-child(10) {
             grid-column: 2 / 3;
         }
@@ -87,10 +100,13 @@
             font-size: 14px;
         }
 
+        /* ======= HIỆU ỨNG ZOOM ======= */
         .overlay {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: rgba(0,0,0,0.6);
             display: none;
             justify-content: center;
@@ -98,7 +114,9 @@
             z-index: 9999;
         }
 
-        .overlay.active { display: flex; }
+        .overlay.active {
+            display: flex;
+        }
 
         .zoom-card {
             width: 380px;
@@ -115,18 +133,37 @@
             object-fit: cover;
         }
 
-        @keyframes zoomIn {
-            from { transform: scale(0.6); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        .zoom-card .info {
+            padding: 22px;
+            text-align: center;
         }
 
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.6);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
         @media (max-width: 900px) {
-            .container { grid-template-columns: repeat(2, 1fr); }
-            .member:nth-child(10) { grid-column: auto; }
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .member:nth-child(10) {
+                grid-column: auto;
+            }
         }
 
         @media (max-width: 600px) {
-            .container { grid-template-columns: 1fr; }
+            .container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -136,7 +173,8 @@
 <h1>GIỚI THIỆU THÀNH VIÊN NHÓM 4 LỚP 12M</h1>
 
 <div class="container">
-      <div class="member"><img src="img/tv1.jpg"><div class="info"><h3>Đào Gia Bảo Ngọc</h3><p>Trưởng nhóm</p><p>Email: a@gmail.com</p><p>SĐT: 0123 456 789</p></div></div>
+
+    <div class="member"><img src="img/tv1.jpg"><div class="info"><h3>Đào Gia Bảo Ngọc</h3><p>Trưởng nhóm</p><p>Email: a@gmail.com</p><p>SĐT: 0123 456 789</p></div></div>
     <div class="member"><img src="img/tv2.jpg"><div class="info"><h3>Buồi Mạnh Trường</h3><p>Phó nhóm</p><p>Email: b@gmail.com</p><p>SĐT: 0987 654 321</p></div></div>
     <div class="member"><img src="img/tv3.jpg"><div class="info"><h3>Phan Thị Phương Thuỷ</h3><p>Thiết kế</p><p>Email: c@gmail.com</p><p>SĐT: 0909 111 222</p></div></div>
     <div class="member"><img src="img/tv4.jpg"><div class="info"><h3>Nguyễn Kim Ngân</h3><p>Nội dung</p><p>Email: d@gmail.com</p><p>SĐT: 0911 222 333</p></div></div>
@@ -146,6 +184,7 @@
     <div class="member"><img src="img/tv8.jpg"><div class="info"><h3>Đặng Kim Ngân</h3><p>Truyền thông</p><p>Email: h@gmail.com</p><p>SĐT: 0910 333 444</p></div></div>
     <div class="member"><img src="img/tv9.jpg"><div class="info"><h3>Phùng Ngọc Tuấn Tú</h3><p>Nhiếp ảnh</p><p>Email: cattertu310308@gmail.com</p><p>SĐT: 0865 831 308</p></div></div>
     <div class="member"><img src="img/tv10.jpg"><div class="info"><h3>Đoàn Nguyễn Thuỳ Trang</h3><p>Hỗ trợ</p><p>Email: k@gmail.com</p><p>SĐT: 0930 999 111</p></div></div>
+
 </div>
 
 <footer>
