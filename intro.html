@@ -43,17 +43,17 @@
 
 <body>
 
-    <!-- Video intro đầu -->
+    
     <video id="introVideo" autoplay muted playsinline>
         <source src="video/intro.mp4" type="video/mp4">
     </video>
 
-    <!-- Video intro 2 (ẩn ban đầu) -->
+   
     <video id="introVideo2" style="display:none;" playsinline>
-        <source src="video/intro2.mp4" type="video/mp4">
+        <source src="video/intro3.mp4" type="video/mp4">
     </video>
 
-    <!-- Nút bấm -->
+   
     <button id="continueBtn">Bấm để tiếp tục</button>
 
 
@@ -62,21 +62,20 @@
         const video2 = document.getElementById("introVideo2");
         const btn = document.getElementById("continueBtn");
 
-        // Khi video 1 kết thúc → hiện nút
+       
         video1.onended = () => {
             btn.style.display = "block";
         };
 
-        // Khi nhấn nút → phát video 2 (có tiếng)
+        
         btn.onclick = () => {
-            btn.style.display = "none";              // Ẩn nút
-            video1.style.display = "none";           // Ẩn video 1
-            video2.style.display = "block";          // Hiện video 2
-            video2.muted = false;                    // Bật âm thanh
-            video2.play();                           // Phát video 2
+            btn.style.display = "none";              
+            video1.style.display = "none";           
+            video2.style.display = "block";          
+            video2.muted = false;                    
+            video2.play();                           
         };
 
-        // Sau khi video 2 phát xong → chuyển trang
         video2.onended = () => {
             window.location.href = "index.html";
         };
