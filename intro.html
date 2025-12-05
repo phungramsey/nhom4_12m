@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <meta charset="UTF-8">
+    <title>Video Intro</title>
+    
+   
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         body {
             margin: 0;
@@ -18,21 +24,24 @@
             object-fit: cover;
         }
 
-        /* Nút tiếp tục */
+        
         #continueBtn {
             position: absolute;
             padding: 15px 30px;
             font-size: 26px;
             border: none;
-            background: #8B0000; /* đỏ đô */
-            color: white;         /* chữ trắng */
+            background: #8B0000; 
+            color: white;         
             border-radius: 10px;
             cursor: pointer;
             display: none;
             z-index: 10;
+
+            font-family: 'Montserrat', sans-serif; 
+            text-transform: uppercase;             
+            font-weight: 700;                      
         }
 
-        /* Fade-out */
         .fade-out {
             animation: fadeOut 1.2s forwards;
         }
@@ -47,17 +56,14 @@
 
 <body>
 
-    <!-- VIDEO 1 -->
     <video id="introVideo" autoplay muted playsinline>
         <source src="video/intro.mp4" type="video/mp4">
     </video>
 
-    <!-- VIDEO 2 -->
     <video id="introVideo2" style="display:none;" playsinline>
         <source src="video/intro3.mp4" type="video/mp4">
     </video>
 
-    <!-- BUTTON -->
     <button id="continueBtn">NHẤN ĐỂ TIẾP TỤC</button>
 
     <script>
@@ -65,17 +71,15 @@
         const video2 = document.getElementById("introVideo2");
         const btn = document.getElementById("continueBtn");
 
-        // Khi video 1 kết thúc → fade out
+        
         video1.onended = () => {
             video1.classList.add("fade-out");
-
-            // Chờ fade-out hoàn tất rồi mới hiện nút
             setTimeout(() => {
                 btn.style.display = "block";
             }, 1200);
         };
 
-        // Khi nhấn tiếp tục → phát video 2
+        
         btn.onclick = () => {
             btn.style.display = "none";
             video1.style.display = "none";
@@ -84,7 +88,7 @@
             video2.play();
         };
 
-        // Khi video 2 kết thúc → chuyển trang
+        
         video2.onended = () => {
             window.location.href = "index.html";
         };
