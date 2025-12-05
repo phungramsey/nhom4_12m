@@ -3,12 +3,12 @@
 <head>
    <meta charset="UTF-8">
 
-    
     <script>
         if (sessionStorage.getItem("loggedIn") !== "true") {
             window.location.href = "login.html";
         }
     </script>
+
     <title>Giới thiệu thành viên nhóm</title>
 
     <style>
@@ -27,6 +27,40 @@
             letter-spacing: 1px;
         }
 
+        /* VIDEO 16:9 + hiệu ứng thu nhỏ khi cuộn */
+        .video-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            margin: 25px auto 0;
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            transition: all 0.4s ease;
+        }
+
+        .video-wrapper video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Khi thu nhỏ */
+        .video-wrapper.shrink {
+            position: fixed;
+            width: 260px;
+            height: 146px; /* 16:9 */
+            bottom: 20px;
+            right: 20px;
+            margin: 0;
+            z-index: 9999;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+        }
+
+        /* GRID THÀNH VIÊN */
         .container {
             max-width: 1200px;
             margin: 40px auto;
@@ -99,7 +133,7 @@
             font-size: 14px;
         }
 
-        
+        /* OVERLAY PHÓNG TO */
         .overlay {
             position: fixed;
             top: 0;
@@ -171,8 +205,14 @@
 
 <h1>GIỚI THIỆU THÀNH VIÊN NHÓM 4 LỚP 12M</h1>
 
-<div class="container">
+<!-- VIDEO intro2.mp4 -->
+<div class="video-wrapper" id="videoBox">
+    <video controls>
+        <source src="video/intro2.mp4" type="video/mp4">
+    </video>
+</div>
 
+<div class="container">
     <div class="member"><img src="img/tv1.jpg"><div class="info"><h3>Đào Gia Bảo Ngọc</h3><p>Trưởng nhóm</p><p>Email: daogiabaongochd2008@gmail.com</p><p>SĐT: 0349 794 188</p></div></div>
     <div class="member"><img src="img/tv2.jpg"><div class="info"><h3>Bùi Mạnh Trường</h3><p>Phó nhóm</p><p>Email: bmt19102008@gmail.com</p><p>SĐT: 0979 981 652</p></div></div>
     <div class="member"><img src="img/tv3.jpg"><div class="info"><h3>Phan Thị Phương Thuỷ</h3><p>Thành viên</p><p>Email: phanthuy08@gmail.com</p><p>SĐT: 0904 225 281</p></div></div>
@@ -183,7 +223,6 @@
     <div class="member"><img src="img/tv8.jpg"><div class="info"><h3>Đặng Kim Ngân</h3><p>Thư kí</p><p>Email: ngandk1408@gmail.com</p><p>SĐT: 0865 960 214</p></div></div>
     <div class="member"><img src="img/tv9.jpg"><div class="info"><h3>Phùng Ngọc Tuấn Tú</h3><p>Nhiếp ảnh & Thiết kế</p><p>Email: cattertu310308@gmail.com</p><p>SĐT: 0865 831 308</p></div></div>
     <div class="member"><img src="img/tv10.jpg"><div class="info"><h3>Đoàn Nguyễn Thuỳ Trang</h3><p>Thành viên</p><p>Email: trang156hd@gmail.com</p><p>SĐT: 0989 019 208</p></div></div>
-
 </div>
 
 <footer>
@@ -193,6 +232,7 @@
 <div class="overlay" id="overlay"></div>
 
 <script>
+    /* Phóng to thẻ thành viên */
     const cards = document.querySelectorAll(".member");
     const overlay = document.getElementById("overlay");
 
@@ -208,6 +248,18 @@
 
     overlay.addEventListener("click", () => {
         overlay.classList.remove("active");
+    });
+
+    /* Thu nhỏ video khi cuộn */
+    const videoBox = document.getElementById("videoBox");
+    const shrinkPoint = 250;
+
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > shrinkPoint) {
+            videoBox.classList.add("shrink");
+        } else {
+            videoBox.classList.remove("shrink");
+        }
     });
 </script>
 
