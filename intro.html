@@ -9,6 +9,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
         video {
@@ -17,20 +18,23 @@
             object-fit: cover;
         }
 
+        /* Nút tiếp tục */
         #continueBtn {
             position: absolute;
             padding: 15px 30px;
-            font-size: 22px;
+            font-size: 26px;
             border: none;
-            background: rgba(255, 255, 255, 0.9);
+            background: #8B0000; /* đỏ đô */
+            color: white;         /* chữ trắng */
             border-radius: 10px;
             cursor: pointer;
             display: none;
             z-index: 10;
         }
 
+        /* Fade-out */
         .fade-out {
-            animation: fadeOut 1s forwards;
+            animation: fadeOut 1.2s forwards;
         }
 
         @keyframes fadeOut {
@@ -43,39 +47,44 @@
 
 <body>
 
-    
+    <!-- VIDEO 1 -->
     <video id="introVideo" autoplay muted playsinline>
         <source src="video/intro.mp4" type="video/mp4">
     </video>
 
-   
+    <!-- VIDEO 2 -->
     <video id="introVideo2" style="display:none;" playsinline>
         <source src="video/intro3.mp4" type="video/mp4">
     </video>
 
-   
-    <button id="continueBtn">Bấm để tiếp tục</button>
-
+    <!-- BUTTON -->
+    <button id="continueBtn">NHẤN ĐỂ TIẾP TỤC</button>
 
     <script>
         const video1 = document.getElementById("introVideo");
         const video2 = document.getElementById("introVideo2");
         const btn = document.getElementById("continueBtn");
 
-       
+        // Khi video 1 kết thúc → fade out
         video1.onended = () => {
-            btn.style.display = "block";
+            video1.classList.add("fade-out");
+
+            // Chờ fade-out hoàn tất rồi mới hiện nút
+            setTimeout(() => {
+                btn.style.display = "block";
+            }, 1200);
         };
 
-        
+        // Khi nhấn tiếp tục → phát video 2
         btn.onclick = () => {
-            btn.style.display = "none";              
-            video1.style.display = "none";           
-            video2.style.display = "block";          
-            video2.muted = false;                    
-            video2.play();                           
+            btn.style.display = "none";
+            video1.style.display = "none";
+            video2.style.display = "block";
+            video2.muted = false;
+            video2.play();
         };
 
+        // Khi video 2 kết thúc → chuyển trang
         video2.onended = () => {
             window.location.href = "index.html";
         };
